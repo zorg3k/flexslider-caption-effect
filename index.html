@@ -1,0 +1,162 @@
+<!doctype html>
+
+<html>
+  <head>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" /> <!-- Slider Stylesheet -->
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/slidetext.css">
+  </head>
+
+  <body>
+    <div class="flexslider"> <!-- Slider gallery starts here -->
+	          		<ul class="slides">
+	            	<li>
+					<h1 class="flex-caption">
+						<i>E</i>
+						<i>c</i>
+						<i>o</i>
+						<i>n</i>
+						<i>o</i>
+						<i>m</i>
+						<i>i</i>
+						<i>c</i>
+					</h1>
+					<ul class="sliding_list">
+						<li class="mustslide">Lorem ipsum dolor sit amet</li>
+						<li class="mustslide">Consectetur adipiscing elit</li>
+						<li class="mustslide">sed do eiusmod tempor</li>
+					</ul>
+	  	    	    <img src="https://i.postimg.cc/14Ck02c3/Slider1.jpg" alt="galleryitem"  /> <!-- Slider gallery image here -->
+	  	    		</li>
+	  	    		<li>
+					<h1 class="flex-caption">
+						<i>E</i>
+						<i>a</i>
+						<i>s</i>
+						<i>y</i>
+					</h1>
+					<ul class="sliding_list">
+						<li class="mustslide">Sed ut perspiciatis unde omnis</li>
+						<li class="mustslide">iste natus error sit voluptatemt</li>
+					</ul>
+	  	    	    <img src="https://i.postimg.cc/gwWQkWdN/Slider2.jpg" alt="galleryitem" /> <!-- Slider gallery image here -->
+	  	    		</li>
+	  	    		<li>
+					<h1 class="flex-caption">
+						<i>F</i>
+						<i>l</i>
+						<i>e</i>
+						<i>x</i>
+						<i>i</i>
+						<i>b</i>
+						<i>l</i>
+						<i>e</i>
+					</h1>
+					<ul class="sliding_list">
+						<li class="mustslide"></li>
+						<li class="mustslide"></li>
+						<li class="mustslide">Nemo enim ipsam voluptatem quia</li>
+						<li class="mustslide">Ut enim ad minima veniam</li>
+						<li class="mustslide">Quis autem vel eum iure reprehenderit</li>
+					</ul>
+	  	    	    <img src="https://i.postimg.cc/p9J7m6Lx/Slider3.jpg" alt="galleryitem" /> <!-- Slider gallery image here -->
+	  	    		</li>
+	  	    		<li>
+					<h1 class="flex-caption">
+						<i>C</i>
+						<i>o</i>
+						<i>r</i>
+						<i>e</i>
+						<i> </i>
+						<i>W</i>
+						<i>o</i>
+						<i>r</i>
+						<i>k</i>
+						<i> </i>
+						<i>v</i>
+						<i>a</i>
+						<i>l</i>
+						<i>u</i>
+						<i>e</i>
+						<i>s</i>
+					</h1>
+					<ul class="sliding_list">
+						<li class="mustslide">Excepteur sint occaecat cupidatat</li>
+						<li class="mustslide">officia deserunt mollit anim id est laborum</li>
+						<li class="mustslide">qui dolorem ipsum quia dolor</li>
+					</ul>
+	  	    	    <img src="https://i.postimg.cc/xJjZM3Xm/Slider4.jpg" alt="galleryitem" /> <!-- Slider gallery image here -->
+	  	    		</li>
+	  	    		
+	          		</ul>
+	        </div> <!-- Slider gallery ends here -->
+
+			
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+
+<!-- FlexSlider 
+==================================================== -->
+	<script defer src="js/jquery.flexslider.js"></script>
+  
+  <script type="text/javascript">
+    $(window).load(function(){
+      $('.flexslider').flexslider({
+        animation: "slide",
+        smoothHeight: true,
+        start: function(slider){
+			$('body').removeClass('loading');
+			var curSlide = $(slider).find('.flex-active-slide');
+			var listes = $(curSlide).find('ul.sliding_list > li');
+			setTimeout(function(){(listes).addClass('swing');},250);
+        },
+		before: function(slider){
+			var curSlide = $(slider).find('.flex-active-slide');
+			var listes = $(curSlide).find('ul.sliding_list > li');
+			$(listes).removeClass('swing');
+		},
+		after: function(slider){
+			var curSlide = slider.currentSlide;
+            var curTitle = slider.find('h1')[curSlide+1];
+			var text = $(curTitle).html();
+			function textEffect(animationName) {
+				var chars = text.length,
+					newText = '',
+					animation = animationName,
+					char,
+					i;
+
+				for (i = 0; i < chars; i += 1) {
+					newText += '<i>' + text.charAt(i) + '</i>';
+				}
+
+				$(curTitle).innerHTML = newText;
+
+				var wrappedChars, wrappedCharsLen, j;
+				wrappedChars = $(slider).find('i');
+				wrappedCharsLen = wrappedChars.length;
+				j = 0;
+				
+				function addEffect () {
+					setTimeout(function () {
+					$(wrappedChars[j]).addClass(animation);
+					j += 1;
+					if (j < wrappedCharsLen) {
+						addEffect();
+						}
+					}, 100)
+				}
+
+				addEffect();
+			};
+
+		textEffect('fly-in-out');
+		var curSlide = $(slider).find('.flex-active-slide');
+		var listes = $(curSlide).find('ul.sliding_list > li');
+		setTimeout(function(){(listes).addClass('swing');},250);
+        }
+      });
+    });
+  </script>
+  </body>
+</html>
